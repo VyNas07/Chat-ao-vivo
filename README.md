@@ -1,3 +1,7 @@
 # Chat-ao-vivo
 
-3wgsr
+### Estrutura do Projeto
+
+- **Frontend**: HTML, CSS, JavaScript.
+- **Backend**: Node.js com Express.
+- **WebSockets**: Socket.io.
