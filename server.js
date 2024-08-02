@@ -1,21 +1,26 @@
-//importar o módulo Express e criar uma aplicação
 const express = require('express');
+const http = require('http');
+const socketIo = require('socket.io');
+
 const app = express();
+const server = http.createServer(app);
+const io = socketIo(server);
 
-//importar o módulo de rotas
+app.use(express.static('public'));
 
-//importar o módulo de validação
+io.on('connection', (socket) => {
+  console.log('a user connected');
 
-//importar o módulo de autenticação
+  socket.on('chat message', (msg) => {
+    io.emit('chat message', msg);
+  });
 
-//importar o módulo de middlewares
+  socket.on('disconnect', () => {
+    console.log('user disconnected');
+  });
+});
 
-//importar o módulo de configuração
-
-//importar o módulo de banco de dados
-
-//importar o módulo de log
-
-//importar o módulo de envio de email
-
-//importar o módulo de envio de push
+const PORT = process.env.PORT || 3000;
+server.listen(PORT, () => {
+  console.log(`Server running on port ${PORT}`);
+});
